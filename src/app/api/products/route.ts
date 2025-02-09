@@ -11,9 +11,6 @@ export async function POST(request: Request) {
     const body = await request.json();
     const queryParams = parseQueryParams(body as QueryParamsType);
 
-    // eslint-disable-next-line no-console
-    console.log('queryParams :', queryParams);
-
     const url = `${JSON_SERVER_URL}/products${queryParams}`;
 
     // Fetch products with related authors

@@ -5,58 +5,9 @@ import React from 'react';
 import Button from '@/components/base/Button';
 import Input from '@/components/base/Input';
 
+import { footerConstrainLinks, footerNavLinks } from '@/lib/constants';
+
 type FooterProps = {};
-
-const navLinks = [
-  { text: 'Home', link: '/' },
-  {
-    text: 'Whitepaper',
-    link: '/whitepaper'
-  },
-  {
-    text: 'FAQs',
-    link: '/faqs'
-  },
-  {
-    text: 'About Us',
-    link: '/about'
-  },
-  {
-    text: 'Marketplace',
-    link: '/marketplace'
-  },
-  {
-    text: 'News',
-    link: '/news'
-  },
-  {
-    text: 'Our teams',
-    link: '/team'
-  },
-  {
-    text: 'Roadmap',
-    link: '/roadmap'
-  },
-  {
-    text: 'Community',
-    link: '/community'
-  }
-];
-
-const constrainLinks = [
-  {
-    text: 'security',
-    link: '/security'
-  },
-  {
-    text: 'legal',
-    link: '/legal'
-  },
-  {
-    text: 'policy',
-    link: '/policy'
-  }
-];
 
 const Footer: React.FC<FooterProps> = () => {
   return (
@@ -66,7 +17,7 @@ const Footer: React.FC<FooterProps> = () => {
           <div className="flex flex-col gap-4">
             <p className="typo-title-20">Navigation</p>
             <div className="grid grid-cols-3 gap-4 auto-cols-min">
-              {navLinks.map(({ link, text }) => (
+              {footerNavLinks.map(({ link, text }) => (
                 <Link key={text} href={link}>
                   <span className="typo-header-medium">{text}</span>
                 </Link>
@@ -102,7 +53,7 @@ const Footer: React.FC<FooterProps> = () => {
         <div className="flex justify-between typo-header-medium">
           <p>©2023 Tyme - Edit. All Rights reserved.</p>
           <div className="flex gap-8">
-            {constrainLinks.map(({ link, text }) => (
+            {footerConstrainLinks.map(({ link, text }) => (
               <Link key={text} href={link}>
                 <span className="capitalize">{text}</span>
               </Link>

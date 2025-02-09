@@ -11,13 +11,6 @@ type FetchState<T> = {
   error: string | null;
 };
 
-/**
- * Custom hook to fetch data from an API.
- *
- * @param url - The URL to fetch data from.
- * @param options - Optional fetch options (e.g., method, headers, etc.).
- * @returns An object containing the fetched data, loading state, and error state.
- */
 function useFetchData<T>(filterParam: QueryParamsType) {
   const [state, setState] = useState<FetchState<T>>({
     data: null,
@@ -50,8 +43,6 @@ function useFetchData<T>(filterParam: QueryParamsType) {
   }, []);
 
   useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log('filterParam :', filterParam);
     fetchData({
       limit: DEFAULT_LIMIT,
       ...filterParam

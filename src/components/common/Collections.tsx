@@ -1,11 +1,12 @@
 'use client';
-import useFetchData from '@/hooks/useFetchData';
+
 import React from 'react';
 import { IProduct } from 'server/model';
 import { QueryParamsType } from 'src/types/queryParams';
 
 import { DEFAULT_LIMIT } from '@/lib/constants';
 
+import useFetchData from '../../hooks/useFetchData';
 import Button from '../base/Button';
 import Card from '../base/Card';
 

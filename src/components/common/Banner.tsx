@@ -5,7 +5,10 @@ type BannerProps = {};
 
 const Banner: React.FC<BannerProps> = () => {
   return (
-    <section className="bg-[url(/images/intro_bg.jpg)] max-h-[50.25rem] bg-cover bg-no-repeat bg-[50%] h-full pt-[8rem] relative">
+    <section
+      className="bg-[url(/images/intro_bg.jpg)] max-h-[50.25rem] bg-cover bg-no-repeat bg-[50%] h-full pt-[8rem] relative"
+      data-testid="banner-section"
+    >
       <div className="absolute w-full h-full bg-black/70 top-0 bottom-0"></div>
       <Image
         src="images/banner.svg"

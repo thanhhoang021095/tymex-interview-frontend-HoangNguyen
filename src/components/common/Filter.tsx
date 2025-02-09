@@ -108,7 +108,7 @@ const Filter: React.FC<FilterProps> = ({ onChangeFilter, filterParams }) => {
       </div>
 
       <div className="flex flex-col gap-8">
-        {dropdownFilterGroups.map(({ label, options, key }) => (
+        {dropdownFilterGroups.map(({ label, options, key }, idx) => (
           <div key={key} className="flex flex-col gap-4">
             <p className="uppercase typo-header-semi text-gray-2">{label}</p>
             <Select
@@ -118,6 +118,7 @@ const Filter: React.FC<FilterProps> = ({ onChangeFilter, filterParams }) => {
                 label as keyof Pick<QueryParamsType, 'tier' | 'theme' | 'time' | 'priceSort'>
               )}
               onChange={(val: string) => onSelect(val, key)}
+              data-testid={`dropdown-select-${idx}`}
             />
           </div>
         ))}

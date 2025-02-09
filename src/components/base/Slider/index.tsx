@@ -4,7 +4,7 @@ import React from 'react';
 
 import './slider.style.css';
 
-interface SliderProps {
+export interface SliderProps {
   min: number;
   max: number;
   step?: number;

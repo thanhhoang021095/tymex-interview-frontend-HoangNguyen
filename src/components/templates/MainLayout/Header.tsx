@@ -2,37 +2,15 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
-import { twMerge } from 'tailwind-merge';
 
 import Button from '@/components/base/Button';
+
+import { headerNavLinks } from '@/lib/constants';
+import { cn } from '@/lib/utils';
 
 import LanguageSwitcher from './LanguageSwitcher';
 
 type HeaderProps = {};
-
-const links = [
-  { slug: '/', label: 'Home' },
-  {
-    slug: '/about',
-    label: 'About us'
-  },
-  {
-    slug: '/team',
-    label: 'Our Teams'
-  },
-  {
-    slug: '/marketplace',
-    label: 'Marketplace'
-  },
-  {
-    slug: '/roadmap',
-    label: 'Roadmap'
-  },
-  {
-    slug: '/whitepaper',
-    label: 'Whitepaper'
-  }
-];
 
 const Header: React.FC<HeaderProps> = () => {
   const pathName = usePathname();
@@ -42,10 +20,10 @@ const Header: React.FC<HeaderProps> = () => {
       <div className="flex items-center justify-between px-[1rem] h-full container">
         {/* Links */}
         <ul className="flex items-center gap-[3rem] text-white">
-          {links.map(({ slug, label }) => (
+          {headerNavLinks.map(({ slug, label }) => (
             <li
               key={slug}
-              className={twMerge(
+              className={cn(
                 'hover:!text-purple',
                 slug === pathName ? '!text-purple' : 'text-white'
               )}

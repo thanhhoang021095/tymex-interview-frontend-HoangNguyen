@@ -27,7 +27,7 @@ interface RootLayoutProps {
 
 const RootLayout = ({ children }: RootLayoutProps) => {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={cn(rangerFont.variable, inter.variable, 'font-inter')}
         suppressHydrationWarning

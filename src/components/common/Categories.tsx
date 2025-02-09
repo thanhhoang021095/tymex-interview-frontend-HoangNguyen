@@ -17,7 +17,7 @@ const Categories: React.FC<CategoriesProps> = ({ onChangeFilter }) => {
   };
 
   return (
-    <div className="flex flex-nowrap gap-4">
+    <div className="flex flex-nowrap gap-4" data-testid="categories">
       {categoryList.map((cate, idx) => (
         <Button onClick={() => onChange(cate)} key={idx}>
           {cate}

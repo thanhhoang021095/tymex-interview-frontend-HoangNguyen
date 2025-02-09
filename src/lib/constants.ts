@@ -91,6 +91,81 @@ export const dropdownFilterGroups = [
   }
 ];
 
+export const footerNavLinks = [
+  { text: 'Home', link: '/' },
+  {
+    text: 'Whitepaper',
+    link: '/whitepaper'
+  },
+  {
+    text: 'FAQs',
+    link: '/faqs'
+  },
+  {
+    text: 'About Us',
+    link: '/about'
+  },
+  {
+    text: 'Marketplace',
+    link: '/marketplace'
+  },
+  {
+    text: 'News',
+    link: '/news'
+  },
+  {
+    text: 'Our teams',
+    link: '/team'
+  },
+  {
+    text: 'Roadmap',
+    link: '/roadmap'
+  },
+  {
+    text: 'Community',
+    link: '/community'
+  }
+];
+
+export const footerConstrainLinks = [
+  {
+    text: 'security',
+    link: '/security'
+  },
+  {
+    text: 'legal',
+    link: '/legal'
+  },
+  {
+    text: 'policy',
+    link: '/policy'
+  }
+];
+
+export const headerNavLinks = [
+  { slug: '/', label: 'Home' },
+  {
+    slug: '/about',
+    label: 'About us'
+  },
+  {
+    slug: '/team',
+    label: 'Our Teams'
+  },
+  {
+    slug: '/marketplace',
+    label: 'Marketplace'
+  },
+  {
+    slug: '/roadmap',
+    label: 'Roadmap'
+  },
+  {
+    slug: '/whitepaper',
+    label: 'Whitepaper'
+  }
+];
+
 export const categoryList: QueryParamsType['category'][] = [
   'All',
   'Upper Body',
