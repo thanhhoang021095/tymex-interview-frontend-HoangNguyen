@@ -1,0 +1,16 @@
+.ant-select {
+  width: 100% !important;
+  height: 44px !important;
+  background-color: transparent !important;
+  color: var(--white) !important;
+}
+
+.ant-select-selector {
+  background-color: transparent !important;
+  color: var(--white) !important;
+  border-color: var(--gray-2) !important;
+}
+
+.ant-select-arrow {
+  color: var(--gray-2) !important;
+}

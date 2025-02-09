@@ -1,0 +1,30 @@
+.ant-input {
+  box-sizing: border-box;
+  border: 1px solid;
+  background-color: transparent !important;
+  color: var(--white);
+  border-radius: 0.25rem !important;
+
+  outline: none !important;
+  box-shadow: none !important;
+  padding: 4px 12px !important;
+}
+
+.ant-input:hover,
+.ant-input:active,
+.ant-input-outlined:hover,
+.ant-input-outlined:active {
+  border-color: var(--purple) !important;
+}
+
+.ant-input::placeholder {
+  color: var(--gray-2) !important;
+}
+
+.ant-input-outlined {
+  background-color: transparent !important;
+  color: var(--white) !important;
+  border-color: var(--gray-2) !important;
+  height: 44px !important;
+  box-sizing: border-box !important;
+}

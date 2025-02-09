@@ -1,3 +1,57 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    /* Font */
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+      Arial, sans-serif;
+
+    /* Colors */
+    --white: #fff;
+    --primary: linear-gradient(91.47deg, #da458f -6%, #da34dd 113.05%);
+    --primary-hover: linear-gradient(91.47deg, #d85697 -6%, #d34dd6 113.05%);
+    --purple: #d85697;
+    --pink: #da40a387;
+    --gray-1: #d6d6d6;
+    --gray-2: #89888b;
+    --gray-3: #3a384199;
+    --gray-4: #3a3841;
+  }
+}
+
+@layer components {
+  .container {
+    @apply max-w-[1520px] mx-auto;
+  }
+
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+
+  /* Font */
+  .typo-title-14 {
+    @apply uppercase font-ranger font-bold text-sm;
+  }
+
+  .typo-title-20 {
+    @apply uppercase font-ranger font-bold text-xl leading-8;
+  }
+
+  .typo-header-semi {
+    @apply font-inter font-semibold text-base;
+  }
+
+  .typo-header-medium {
+    @apply font-inter font-medium text-base;
+  }
+
+  .typo-caption-medium {
+    @apply font-inter font-medium text-xs leading-5;
+  }
+
+  .typo-body-medium {
+    @apply font-inter font-medium text-sm;
+  }
+}

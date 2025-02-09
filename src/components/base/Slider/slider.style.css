@@ -1,0 +1,23 @@
+.dot-slider:after {
+  background-image: url('/icons/slider-dot.svg') !important;
+  background-color: unset !important;
+  box-shadow: 0 0 1rem 0.1875rem var(--pink) !important;
+  background-position: 50%;
+  /* inset-block-start: unset !important;
+   inset-inline-start: unset !important; */
+  width: 24px !important;
+  height: 24px !important;
+  top: -4px !important;
+  left: -6px !important;
+}
+
+.slider-tracks,
+.slider-track,
+.slider-rail {
+  height: 8px !important;
+}
+
+.ant-tooltip-inner,
+.ant-tooltip-arrow:before {
+  background: var(--primary) !important;
+}

@@ -2,14 +2,18 @@ import '@/styles/globals.css';
 
 import { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import localFont from 'next/font/local';
 import { ReactNode } from 'react';
 
-import { MainProvider } from '@/components/providers/MainProvider';
 import { MainLayout } from '@/components/templates/MainLayout';
 
 import { cn } from '@/lib/utils';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-primary' });
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const rangerFont = localFont({
+  src: '../../public/fonts/drone-ranger/dronerangerpro_bold.otf',
+  variable: '--font-ranger'
+});
 
 export const metadata: Metadata = {
   title: 'Home page | Nextjs boilerplate',
@@ -24,12 +28,13 @@ interface RootLayoutProps {
 const RootLayout = ({ children }: RootLayoutProps) => {
   return (
     <html lang="en">
-      <body className={cn(inter.variable, 'font-primary')} suppressHydrationWarning>
-        <MainProvider>
-          <MainLayout>
-            <main>{children}</main>
-          </MainLayout>
-        </MainProvider>
+      <body
+        className={cn(rangerFont.variable, inter.variable, 'font-inter')}
+        suppressHydrationWarning
+      >
+        <MainLayout>
+          <main>{children}</main>
+        </MainLayout>
       </body>
     </html>
   );
