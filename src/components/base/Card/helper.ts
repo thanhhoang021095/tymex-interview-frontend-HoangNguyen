@@ -1,4 +1,4 @@
-import { IProduct } from 'server/model';
+import { IProduct } from 'src/types/model';
 
 export const getRandomNumber = (): number => {
   return Math.floor(Math.random() * 5) + 1;

@@ -1,7 +1,7 @@
+/* eslint-disable import-helpers/order-imports */
 'use client';
 
 import React from 'react';
-import { IProduct } from 'server/model';
 import { QueryParamsType } from 'src/types/queryParams';
 
 import { DEFAULT_LIMIT } from '@/lib/constants';
@@ -11,6 +11,7 @@ import Button from '../base/Button';
 import Card from '../base/Card';
 
 import './common.style.css';
+import { IProduct } from 'src/types/model';
 
 type CollectionsProps = {
   filterParams: QueryParamsType;

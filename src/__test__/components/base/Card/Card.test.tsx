@@ -3,7 +3,7 @@
 /* eslint-disable newline-before-return */
 /* eslint-disable react/display-name */
 import { render, screen } from '@testing-library/react';
-import { IProduct } from 'server/model';
+import { IProduct } from 'src/types/model';
 
 import Card from '../../../../components/base/Card/index';
 

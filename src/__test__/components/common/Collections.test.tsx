@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { IProduct } from 'server/model';
+import { IProduct } from 'src/types/model';
 import { QueryParamsType } from 'src/types/queryParams';
 
 import { DEFAULT_LIMIT } from '@/lib/constants';

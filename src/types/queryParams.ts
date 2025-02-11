@@ -1,4 +1,4 @@
-import { IProduct } from 'server/model';
+import { IProduct } from './model';
 
 export interface QueryParamsType {
   limit?: number;

@@ -4,8 +4,8 @@ import Image from 'next/image';
 import React, { FC } from 'react';
 
 import './card.style.css';
-import { IProduct } from 'server/model';
 import { mapAuthorStatus, randomCardStyle } from './helper';
+import { IProduct } from 'src/types/model';
 
 const CardContent: FC<IProduct> = ({ title, author, price, isFavorite, category }) => {
   const { characterImg, background: characterBg } = randomCardStyle();
