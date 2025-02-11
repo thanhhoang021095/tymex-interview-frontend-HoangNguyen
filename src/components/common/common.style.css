@@ -1,0 +1,19 @@
+.custom-sidebar::-webkit-scrollbar {
+  height: auto;
+  width: 0.375rem;
+}
+
+.custom-sidebar-horizontal::-webkit-scrollbar {
+  height: 0.25rem;
+  width: auto;
+}
+
+.custom-sidebar::-webkit-scrollbar-thumb {
+  background: #ffcc21 !important;
+  border-radius: 0.25rem;
+}
+
+.custom-sidebar::-webkit-scrollbar-track {
+  background: #777;
+  border-radius: 0.25rem;
+}

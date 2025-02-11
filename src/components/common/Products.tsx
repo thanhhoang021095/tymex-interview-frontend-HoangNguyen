@@ -14,11 +14,11 @@ const Products: React.FC<ProductsProps> = () => {
 
   return (
     <>
-      <div className="text-white pt-[8rem] grid grid-cols-8 gap-12 px-8 container">
+      <div className="text-white pt-16 lg:pt-[8rem] grid xl:grid-cols-8 lg:grid-cols-6 grid-cols-1 gap-y-12 md:gap-x-12 px-12 container">
         <div className="col-span-2">
           <Filter onChangeFilter={onChangeFilter} filterParams={filterParams} />
         </div>
-        <div className="col-span-6">
+        <div className="xl:col-span-6 lg:col-span-4 col-span-1">
           <div className="flex flex-col gap-16">
             <Categories onChangeFilter={onChangeFilter} />
             <Collections filterParams={filterParams} onChangeFilter={onChangeFilter} />

@@ -29,7 +29,7 @@ const RootLayout = ({ children }: RootLayoutProps) => {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={cn(rangerFont.variable, inter.variable, 'font-inter')}
+        className={cn(rangerFont.variable, inter.variable, 'font-inter overflow-x-hidden')}
         suppressHydrationWarning
       >
         <MainLayout>

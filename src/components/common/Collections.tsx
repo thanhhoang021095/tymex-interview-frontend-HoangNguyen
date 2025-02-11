@@ -10,6 +10,8 @@ import useFetchData from '../../hooks/useFetchData';
 import Button from '../base/Button';
 import Card from '../base/Card';
 
+import './common.style.css';
+
 type CollectionsProps = {
   filterParams: QueryParamsType;
   onChangeFilter: (option: QueryParamsType) => void;
@@ -38,7 +40,7 @@ const Collections: React.FC<CollectionsProps> = ({ filterParams, onChangeFilter 
 
     return (
       <>
-        <div className="grid grid-cols-4 gap-4 overflow-x-hidden max-h-[112.5rem] overflow-y-auto">
+        <div className="grid xl:grid-cols-4 grid-cols2 md:grid-cols-2 gap-4 pr-2 overflow-x-hidden max-h-[112.5rem] overflow-y-auto custom-sidebar">
           {data?.map((item: IProduct) => <Card key={item.id} {...item} />)}
         </div>
         <div className="mt-10 w-full flex justify-center">

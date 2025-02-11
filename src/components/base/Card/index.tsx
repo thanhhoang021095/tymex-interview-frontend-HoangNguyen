@@ -74,7 +74,7 @@ type CardProps = IProduct;
 
 const Card: FC<CardProps> = (props) => {
   return (
-    <AntdCard className="card">
+    <AntdCard className="card lg:h-[22.8125rem] !h-auto">
       <CardContent {...props} />
     </AntdCard>
   );

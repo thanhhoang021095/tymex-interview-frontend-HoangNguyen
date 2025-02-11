@@ -5,10 +5,10 @@ import React from 'react';
 
 import { MainLayout } from '../../components/templates/MainLayout/MainLayout';
 
-jest.mock('../../components/templates/MainLayout/Header', () => () => (
+jest.mock('../../components/common/Header', () => () => (
   <header data-testid="header">Mocked Header</header>
 ));
-jest.mock('../../components/templates/MainLayout/Footer', () => () => (
+jest.mock('../../components/common/Footer', () => () => (
   <footer data-testid="footer">Mocked Footer</footer>
 ));
 

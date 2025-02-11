@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import LanguageSwitcher from '../../components/templates/MainLayout/LanguageSwitcher';
+import LanguageSwitcher from '../../../components/common/LanguageSwitcher';
 
 // Mock next/image
 jest.mock('next/image', () => ({

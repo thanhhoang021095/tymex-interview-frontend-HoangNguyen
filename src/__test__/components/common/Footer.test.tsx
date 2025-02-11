@@ -2,11 +2,13 @@ import { render, screen } from '@testing-library/react';
 
 import { footerConstrainLinks, footerNavLinks } from '@/lib/constants';
 
-import Footer from '../../components/templates/MainLayout/Footer';
+import Footer from '../../../components/common/Footer';
 
 // Mock dependencies
-jest.mock('@/components/base/Button', () => jest.fn(({ children }) => <button>{children}</button>));
-jest.mock('@/components/base/Input', () => jest.fn((props) => <input {...props} />));
+jest.mock('../../../components/base/Button/index', () =>
+  jest.fn(({ children }) => <button>{children}</button>)
+);
+jest.mock('../../../components/base/Input/index', () => jest.fn((props) => <input {...props} />));
 
 jest.mock('next/image', () => ({
   __esModule: true,

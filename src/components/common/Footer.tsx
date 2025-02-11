@@ -11,9 +11,9 @@ type FooterProps = {};
 
 const Footer: React.FC<FooterProps> = () => {
   return (
-    <footer className=" bg-footer py-[2rem]">
-      <div className="flex flex-col text-white container px-8">
-        <div className="flex justify-between">
+    <footer className=" bg-footer py-8">
+      <div className="flex flex-col text-white container px-12">
+        <div className="flex justify-between lg:flex-row flex-col gap-10 items-center text-center">
           <div className="flex flex-col gap-4">
             <p className="typo-title-20">Navigation</p>
             <div className="grid grid-cols-3 gap-4 auto-cols-min">
@@ -50,7 +50,7 @@ const Footer: React.FC<FooterProps> = () => {
 
         <hr className="w-full border border-l-[1px] border-gray-4 my-[3rem]"></hr>
 
-        <div className="flex justify-between typo-header-medium">
+        <div className="flex justify-between typo-header-medium lg:flex-row flex-col items-center text-center gap-4">
           <p>©2023 Tyme - Edit. All Rights reserved.</p>
           <div className="flex gap-8">
             {footerConstrainLinks.map(({ link, text }) => (

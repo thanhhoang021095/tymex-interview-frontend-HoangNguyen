@@ -1,90 +1,78 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import debounce from 'lodash/debounce';
-import { QueryParamsType } from 'src/types/queryParams';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable react/display-name */
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import React from 'react';
 
 import { INIT_FILTER_PARAMS } from '@/lib/constants';
 
 import Filter from '../../../components/common/Filter';
 
-jest.mock('lodash/debounce', () =>
-  jest.fn((fn) => {
-    fn.cancel = jest.fn();
+const mockOnChangeFilter = jest.fn();
 
-    return fn;
-  })
-);
+const defaultFilterParams = INIT_FILTER_PARAMS;
 
-jest.mock('../../../components/base/Input', () =>
-  jest.fn(({ onChange }) => <input data-testid="search-input" onChange={onChange} />)
-);
-
-jest.mock('../../../components/base/Slider', () =>
-  jest.fn(({ onChange, onChangeComplete }) => (
-    <div data-testid="price-slider">
-      <button onClick={() => onChange([10, 100])}>Change Range</button>
-      <button onClick={() => onChangeComplete([10, 100])}>Complete Range</button>
-    </div>
-  ))
-);
-
-jest.mock('../../../components/base/Select', () =>
-  jest.fn(({ options, onChange }) => (
-    <select data-testid="dropdown-select" onChange={(e) => onChange(e.target.value)}>
-      {options.map((option: Record<string, string>) => (
-        <option key={option.value} value={option.value}>
-          {option.label}
-        </option>
-      ))}
-    </select>
-  ))
-);
-
-jest.mock('../../../components/base/Button', () =>
-  jest.fn(({ children }) => <button data-testid="button">{children}</button>)
-);
+jest.mock('../../../components/base/Slider/index', () => (props: any) => (
+  <input
+    type="range"
+    data-testid={props['data-testid']}
+    value={props.value[1]} // Second value in the range
+    onChange={(e) => {
+      const newValue = Number(e.target.value);
+      props.onChange([props.value[0], newValue]); // Simulate range update
+    }}
+    onMouseUp={(e: any) => {
+      const newValue = Number(e.target.value);
+      props.onChangeComplete([props.value[0], newValue]); // Simulate final range value
+    }}
+  />
+));
 
 describe('Filter Component', () => {
-  const mockOnChangeFilter = jest.fn();
-  const mockFilterParams: QueryParamsType = {
-    search: '',
-    priceRange: [0, 1000],
-    tier: 'All',
-    theme: 'All',
-    time: 'latest',
-    priceSort: 'asc'
-  };
-
   beforeEach(() => {
-    jest.clearAllMocks();
+    mockOnChangeFilter.mockClear();
   });
 
-  it('calls onChangeFilter when the search input changes', () => {
-    render(<Filter filterParams={mockFilterParams} onChangeFilter={mockOnChangeFilter} />);
+  it('renders the filter component correctly', () => {
+    render(<Filter filterParams={defaultFilterParams} onChangeFilter={mockOnChangeFilter} />);
 
-    const searchInput = screen.getByTestId('search-input');
-    fireEvent.change(searchInput, { target: { value: 'New Search' } });
+    expect(screen.getByPlaceholderText('Quick search')).toBeInTheDocument();
+    expect(screen.getByText('Price')).toBeInTheDocument();
 
-    expect(debounce).toHaveBeenCalled();
-    expect(mockOnChangeFilter).toHaveBeenCalledWith({ search: 'New Search' });
+    const resetButtons = screen.getAllByTestId('reset-button');
+    expect(resetButtons[0]).toBeInTheDocument();
   });
 
-  it('calls onChangeFilter when price range changes', () => {
-    render(<Filter filterParams={mockFilterParams} onChangeFilter={mockOnChangeFilter} />);
+  it('calls onChangeFilter when search input changes', async () => {
+    render(<Filter filterParams={defaultFilterParams} onChangeFilter={mockOnChangeFilter} />);
 
-    const changeButton = screen.getByText('Change Range');
-    fireEvent.click(changeButton);
-    expect(mockOnChangeFilter).not.toHaveBeenCalled();
+    const searchInput = screen.getByPlaceholderText('Quick search');
+    fireEvent.change(searchInput, { target: { value: 'test search' } });
 
-    const completeButton = screen.getByText('Complete Range');
-    fireEvent.click(completeButton);
-    expect(mockOnChangeFilter).toHaveBeenCalledWith({ priceRange: [10, 100] });
+    expect(screen.getByDisplayValue('test search')).toBeInTheDocument();
+
+    // Wait for debounce delay
+    await waitFor(() => {
+      expect(mockOnChangeFilter).toHaveBeenCalledWith({ search: 'test search' });
+    });
   });
 
-  it('resets the filter when the Reset button is clicked', () => {
-    render(<Filter filterParams={mockFilterParams} onChangeFilter={mockOnChangeFilter} />);
+  it('updates price range on slider change', () => {
+    render(<Filter filterParams={defaultFilterParams} onChangeFilter={mockOnChangeFilter} />);
 
-    const resetButton = screen.getByText('Reset filter');
-    fireEvent.click(resetButton);
+    const slider = screen.getByTestId('price-slider');
+
+    fireEvent.change(slider, { target: { value: 500 } });
+    fireEvent.mouseUp(slider);
+
+    expect(mockOnChangeFilter).toHaveBeenCalledWith({ priceRange: [0, 100] });
+  });
+
+  it('resets the filter when reset button is clicked', () => {
+    render(<Filter filterParams={defaultFilterParams} onChangeFilter={mockOnChangeFilter} />);
+
+    const resetButtons = screen.getAllByTestId('reset-button');
+    expect(resetButtons[0]).toBeInTheDocument();
+    fireEvent.click(resetButtons[0]);
 
     expect(mockOnChangeFilter).toHaveBeenCalledWith(INIT_FILTER_PARAMS);
   });

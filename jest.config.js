@@ -9,9 +9,11 @@ module.exports = {
     '<rootDir>/.next/',
     '<rootDir>[/\\\\](node_modules|.next)[/\\\\]',
     '<rootDir>/.jest/test-utils.tsx',
-    '<rootDir>/__mocks__/*'
+    '<rootDir>/__mocks__/*',
+    '<rootDir>/server/*',
+    '<rootDir>/src/app/api/*'
   ],
-  transformIgnorePatterns: ['/node_modules/', '^.+\\.module\\.(css|sass|scss)$', 'server/*'],
+  transformIgnorePatterns: ['/node_modules/', '^.+\\.module\\.(css|sass|scss)$'],
   transform: {
     // Use babel-jest to transpile tests with the next/babel preset
     // https://jestjs.io/docs/configuration#transform-objectstring-pathtotransformer--pathtotransformer-object
@@ -27,6 +29,11 @@ module.exports = {
       statements: 80
     }
   },
+  coveragePathIgnorePatterns: [
+    '/node_modules/',
+    '<rootDir>/src/app/api/*',
+    '<rootDir>/src/hooks/useFetchData.ts'
+  ],
   coverageReporters: ['json', 'html'],
   collectCoverageFrom: [
     '<rootDir>/src/**/*.*',

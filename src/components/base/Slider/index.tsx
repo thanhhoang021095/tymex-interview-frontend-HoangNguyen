@@ -31,6 +31,7 @@ const Slider: React.FC<SliderProps> = ({
       max={max}
       onChangeComplete={onChangeComplete}
       onChange={onChange}
+      step={0.01}
       classNames={{
         handle: 'dot-slider',
         tracks: 'slider-tracks',
@@ -41,6 +42,11 @@ const Slider: React.FC<SliderProps> = ({
         open: true,
         autoAdjustOverflow: false,
         placement: 'top',
+        styles: {
+          root: {
+            zIndex: 30
+          }
+        },
         formatter: (value) => {
           return <p className="typo-header-semi">{`${value} ETH`}</p>;
         }
