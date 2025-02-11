@@ -8,10 +8,11 @@ import Button from '../base/Button';
 import './common.style.css';
 
 type CategoriesProps = {
+  selectedCategory: QueryParamsType['category'];
   onChangeFilter: (option: QueryParamsType) => void;
 };
 
-const Categories: React.FC<CategoriesProps> = ({ onChangeFilter }) => {
+const Categories: React.FC<CategoriesProps> = ({ selectedCategory, onChangeFilter }) => {
   const onChange = (selectedCate: QueryParamsType['category']) => {
     onChangeFilter({
       category: selectedCate
@@ -24,7 +25,11 @@ const Categories: React.FC<CategoriesProps> = ({ onChangeFilter }) => {
       data-testid="categories"
     >
       {categoryList.map((cate, idx) => (
-        <Button onClick={() => onChange(cate)} key={idx}>
+        <Button
+          onClick={() => onChange(cate)}
+          key={idx}
+          className={selectedCategory !== cate ? '!bg-category' : ''}
+        >
           {cate}
         </Button>
       ))}

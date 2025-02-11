@@ -29,7 +29,7 @@ const Header: React.FC<HeaderProps> = () => {
             className={cn('hover:!text-purple', slug === pathName ? '!text-purple' : 'text-white')}
           >
             <Link href={slug} className="inline-block p-2 transition-colors">
-              <p className="typo-title-14 relative">
+              <p className="lg:typo-title-14 typo-title-20 relative">
                 {label}
                 {slug === pathName && (
                   <span className="absolute -bottom-[4px] left-0 bg-purple h-[2px] w-[1rem]"></span>
@@ -44,7 +44,7 @@ const Header: React.FC<HeaderProps> = () => {
 
   return (
     <header className="bg-header fixed z-50 w-full top-0 h-[5.25rem] ">
-      <div className="flex items-center justify-between px-12 h-full container">
+      <div className="flex items-center justify-between md:px-12 px-6 h-full container">
         {/* Desktop Navigation */}
         <div className="hidden lg:block" role="navigation" aria-label="desktop navigation">
           {renderNavLink}
@@ -58,7 +58,7 @@ const Header: React.FC<HeaderProps> = () => {
         {/* Mobile Navigation */}
 
         {/* Wallet */}
-        <div className="gap-[3rem] flex items-center">
+        <div className="gap-4 flex items-center">
           <Button>Collect Wallet</Button>
           <LanguageSwitcher />
         </div>

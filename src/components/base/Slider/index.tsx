@@ -48,7 +48,9 @@ const Slider: React.FC<SliderProps> = ({
           }
         },
         formatter: (value) => {
-          return <p className="typo-header-semi">{`${value} ETH`}</p>;
+          return (
+            <p className="typo-header-semi md:max-w-full max-w-[2.5rem] text-center box-border">{`${value} ETH`}</p>
+          );
         }
       }}
       styles={{

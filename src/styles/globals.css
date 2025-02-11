@@ -12,6 +12,7 @@
     --white: #fff;
     --primary: linear-gradient(91.47deg, #da458f -6%, #da34dd 113.05%);
     --primary-hover: linear-gradient(91.47deg, #d85697 -6%, #d34dd6 113.05%);
+    --primary-category: linear-gradient(91.47deg, #da458f66 -6%, #da34dd66 113.05%);
     --purple: #d85697;
     --pink: #da40a387;
     --gray-1: #d6d6d6;

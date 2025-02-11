@@ -20,7 +20,8 @@ module.exports = {
       },
       backgroundImage: {
         button: 'var(--primary)',
-        'button-hover': 'var(--primary-hover)'
+        'button-hover': 'var(--primary-hover)',
+        category: 'var(--primary-category)'
       },
       boxShadow: {
         button: '0 0 3.125rem 0 #bb4bff52'

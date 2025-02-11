@@ -12,7 +12,7 @@ type FooterProps = {};
 const Footer: React.FC<FooterProps> = () => {
   return (
     <footer className=" bg-footer py-8">
-      <div className="flex flex-col text-white container px-12">
+      <div className="flex flex-col text-white container md:px-12 px-6">
         <div className="flex justify-between lg:flex-row flex-col gap-10 items-center text-center">
           <div className="flex flex-col gap-4">
             <p className="typo-title-20">Navigation</p>
@@ -27,7 +27,7 @@ const Footer: React.FC<FooterProps> = () => {
 
           <div className="flex flex-col gap-4">
             <p className="typo-title-20">Contact us</p>
-            <div className="flex flex-col gap-4 typo-header-medium">
+            <div className="flex flex-col gap-4 typo-header-medium lg:items-start items-center">
               <div className="flex gap-4">
                 <Image src="icons/phone.svg" alt="phone icon" width={16} height={16} />
                 <span>01234568910</span>
