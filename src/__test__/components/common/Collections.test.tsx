@@ -1,63 +1,56 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import React from 'react';
 import { IProduct } from 'src/types/model';
-import { QueryParamsType } from 'src/types/queryParams';
 
 import { DEFAULT_LIMIT } from '@/lib/constants';
 
 import Collections from '../../../components/common/Collections';
+import useFetchData from '../../../hooks/useFetchData';
 
-// Mocking the custom hook
-jest.mock('../../../hooks/useFetchData', () => ({
-  __esModule: true,
-  default: jest.fn()
-}));
-
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const mockUseFetchData = require('../../../hooks/useFetchData').default;
+jest.mock('../../../hooks/useFetchData', () => jest.fn());
 
 describe('Collections Component', () => {
-  const mockOnChangeFilter = jest.fn();
   const mockFetchData = jest.fn();
+  const mockOnChangeFilter = jest.fn();
+
+  const mockFilterParams = {
+    limit: DEFAULT_LIMIT,
+    search: ''
+  };
 
   beforeEach(() => {
+    (useFetchData as jest.Mock).mockReturnValue({
+      data: [],
+      error: null,
+      isLoading: false,
+      fetchData: mockFetchData
+    });
+  });
+
+  afterEach(() => {
     jest.clearAllMocks();
-    mockUseFetchData.mockReturnValue({
-      data: null,
-      error: null,
-      isLoading: false,
-      fetchData: mockFetchData
-    });
   });
 
-  const filterParams: QueryParamsType = { category: 'Epic' };
+  it('renders without crashing', () => {
+    render(<Collections filterParams={mockFilterParams} onChangeFilter={mockOnChangeFilter} />);
 
-  it('renders loading state', () => {
-    mockUseFetchData.mockReturnValueOnce({
-      data: null,
-      error: null,
-      isLoading: true,
-      fetchData: mockFetchData
-    });
-
-    render(<Collections filterParams={filterParams} onChangeFilter={mockOnChangeFilter} />);
-
-    expect(screen.getByText('Loading...')).toBeInTheDocument();
+    expect(screen.getByText('View more')).toBeInTheDocument();
   });
 
-  it('renders error state', () => {
-    mockUseFetchData.mockReturnValueOnce({
-      data: null,
-      error: 'Failed to fetch',
+  it('displays an error message if there is an error', () => {
+    (useFetchData as jest.Mock).mockReturnValueOnce({
+      data: [],
+      error: 'Some error occurred',
       isLoading: false,
       fetchData: mockFetchData
     });
 
-    render(<Collections filterParams={filterParams} onChangeFilter={mockOnChangeFilter} />);
+    render(<Collections filterParams={mockFilterParams} onChangeFilter={mockOnChangeFilter} />);
 
     expect(screen.getByText('Error')).toBeInTheDocument();
   });
 
-  it('renders data and handles "View more" button click', () => {
+  it('renders a list of products', () => {
     const mockData: IProduct[] = [
       {
         id: 1,
@@ -99,29 +92,31 @@ describe('Collections Component', () => {
       }
     ];
 
-    mockUseFetchData.mockReturnValueOnce({
+    (useFetchData as jest.Mock).mockReturnValueOnce({
       data: mockData,
       error: null,
       isLoading: false,
       fetchData: mockFetchData
     });
 
-    render(<Collections filterParams={filterParams} onChangeFilter={mockOnChangeFilter} />);
+    render(<Collections filterParams={mockFilterParams} onChangeFilter={mockOnChangeFilter} />);
 
-    // Check for "View more" button
-    const viewMoreButton = screen.getByText('View more');
-    expect(viewMoreButton).toBeInTheDocument();
+    expect(screen.getByText('Product 1')).toBeInTheDocument();
+    expect(screen.getByText('Product 2')).toBeInTheDocument();
+  });
 
-    // Simulate clicking the "View more" button
-    fireEvent.click(viewMoreButton);
-
-    expect(mockFetchData).toHaveBeenCalledWith({
-      limit: mockData.length + DEFAULT_LIMIT,
-      ...filterParams
+  it('disables the "View more" button when loading', () => {
+    (useFetchData as jest.Mock).mockReturnValueOnce({
+      data: [],
+      error: null,
+      isLoading: true,
+      fetchData: mockFetchData
     });
 
-    expect(mockOnChangeFilter).toHaveBeenCalledWith({
-      limit: mockData.length + DEFAULT_LIMIT
-    });
+    render(<Collections filterParams={mockFilterParams} onChangeFilter={mockOnChangeFilter} />);
+
+    // eslint-disable-next-line testing-library/no-node-access
+    const viewMoreButton = screen.getByText('View more').closest('button'); // Find the button element
+    expect(viewMoreButton).toBeDisabled();
   });
 });

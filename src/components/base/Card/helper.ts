@@ -1,16 +1,24 @@
 import { IProduct } from 'src/types/model';
 
-export const getRandomNumber = (): number => {
-  return Math.floor(Math.random() * 5) + 1;
+const LIMIT_NUMBER = 5;
+
+export const getRandomNumber = (index: number): number => {
+  // Simple deterministic random number generation
+  // 12345 is an arbitrary multiplier to introduce variability
+  // 6789 is an arbitrary modulus to reduce the scale of the result
+  // % 5 ensures the final result is in the range 0-4, and +1 shifts it to 1-5
+  const random = (((index * 12345) % 6789) % LIMIT_NUMBER) + 1;
+
+  return random;
 };
 
 export const mapAuthorStatus = (status: IProduct['author']['onlineStatus']): string => {
   return `icons/${status}-status.svg`;
 };
 
-export const randomCardStyle = () => {
-  const num1 = getRandomNumber();
-  const num2 = getRandomNumber();
+export const randomCardStyle = (index: number) => {
+  const num1 = getRandomNumber(index);
+  const num2 = getRandomNumber(index);
 
   const bgCollections = {
     1: 'linear-gradient(90.13deg, rgb(221, 90, 254) 0%, rgb(99, 102, 241) 100%)',

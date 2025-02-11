@@ -11,7 +11,7 @@ type ButtonProps = {
   Omit<AntdButtonProps, 'className'>;
 
 const Button: FC<ButtonProps> = ({ children = null, className = '', ...props }) => {
-  const baseClasses = `!rounded-[.25rem] bg-transparent !bg-button min-h-[2.5rem] shadow-button text-white border-none
+  const baseClasses = `!rounded-[.25rem] bg-transparent shadow-none !bg-button min-h-[2.5rem] text-white border-none
   flex items-center justify-center py-[0.5rem] px-[1rem] !typo-header-semi
   hover:!bg-button-hover
   `;

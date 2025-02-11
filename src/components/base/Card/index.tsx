@@ -7,8 +7,15 @@ import './card.style.css';
 import { mapAuthorStatus, randomCardStyle } from './helper';
 import { IProduct } from 'src/types/model';
 
-const CardContent: FC<IProduct> = ({ title, author, price, isFavorite, category }) => {
-  const { characterImg, background: characterBg } = randomCardStyle();
+const CardContent: FC<IProduct & { index: number }> = ({
+  title,
+  author,
+  price,
+  isFavorite,
+  category,
+  index
+}) => {
+  const { characterImg, background: characterBg } = randomCardStyle(index);
 
   return (
     <div className="flex flex-col overflow-hidden text-white">
@@ -37,7 +44,6 @@ const CardContent: FC<IProduct> = ({ title, author, price, isFavorite, category 
             <p className="typo-body-medium whitespace-nowrap shrink-0">{price} ETH</p>
           </div>
         </div>
-
         <div className="flex gap-2 items-center">
           <div className="w-[2.125rem] h-[2.125rem] relative">
             <div className="rounded-full w-[2rem] h-[2rem] bg-white relative overflow-hidden z-[1]">
@@ -70,12 +76,15 @@ const CardContent: FC<IProduct> = ({ title, author, price, isFavorite, category 
   );
 };
 
-type CardProps = IProduct;
+type CardProps = IProduct & {
+  loading?: boolean;
+  cardIndex: number;
+};
 
-const Card: FC<CardProps> = (props) => {
+const Card: FC<CardProps> = ({ loading = false, cardIndex = 0, ...rest }) => {
   return (
-    <AntdCard className="card lg:h-[22.8125rem] !h-auto">
-      <CardContent {...props} />
+    <AntdCard className="card lg:h-[22.8125rem] !h-auto !fade-in-50" loading={loading}>
+      <CardContent {...rest} index={cardIndex} />
     </AntdCard>
   );
 };

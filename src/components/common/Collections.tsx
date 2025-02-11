@@ -19,12 +19,12 @@ type CollectionsProps = {
 };
 
 const Collections: React.FC<CollectionsProps> = ({ filterParams, onChangeFilter }) => {
-  const { data, error, isLoading, fetchData } = useFetchData<IProduct[]>(filterParams);
+  const { data, error, isLoading, fetchData } = useFetchData(filterParams);
 
-  const onViewMore = () => {
-    const limit = (data?.length || 0) + DEFAULT_LIMIT;
+  const onViewMore = async () => {
+    const limit = (data.length || 0) + DEFAULT_LIMIT;
 
-    fetchData({
+    await fetchData({
       limit,
       ...filterParams
     });
@@ -35,17 +35,19 @@ const Collections: React.FC<CollectionsProps> = ({ filterParams, onChangeFilter 
   };
 
   const content = React.useMemo(() => {
-    if (isLoading) return <div>Loading...</div>;
-
-    if (error) return <div>Error</div>;
+    if (error) return <div className="min-h-[112.5rem]">Error</div>;
 
     return (
       <>
         <div className="grid xl:grid-cols-4 grid-cols2 md:grid-cols-2 gap-4 pr-2 overflow-x-hidden max-h-[112.5rem] overflow-y-auto custom-sidebar">
-          {data?.map((item: IProduct) => <Card key={item.id} {...item} />)}
+          {data.map((item: IProduct, idx) => (
+            <Card key={`${item.id}_${idx}`} cardIndex={item.id} {...item} loading={isLoading} />
+          ))}
         </div>
         <div className="mt-10 w-full flex justify-center">
-          <Button onClick={onViewMore}>View more</Button>
+          <Button onClick={onViewMore} loading={isLoading} disabled={isLoading}>
+            View more
+          </Button>
         </div>
       </>
     );

@@ -128,7 +128,7 @@ const Filter: FC<FilterProps> = ({ onChangeFilter, filterParams }) => {
         }
       />
 
-      <div className="flex flex-row lg:items-start items-center lg:flex-col justify-start lg:gap-2 gap-6">
+      <div className="flex flex-row lg:items-start items-center lg:flex-col justify-start lg:gap-2 gap-6 lg:mt-0 mt-6">
         <p className="typo-header-semi">Price</p>
         <div className="flex flex-col w-full">
           <Slider

@@ -1,28 +1,42 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import { IProduct } from 'src/types/model';
 import { QueryParamsType } from 'src/types/queryParams';
 
 import { DEFAULT_LIMIT } from '@/lib/constants';
 import { parseQueryParams } from '@/lib/utils/parseQueryParams';
 
-type FetchState<T> = {
-  data: T | null;
+type FetchState = {
+  data: IProduct[];
   isLoading: boolean;
   error: string | null;
 };
 
 const JSON_SERVER_URL = process.env.NEXT_PUBLIC_BASE_SERVER_URL;
 
-function useFetchData<T>(filterParam: QueryParamsType) {
-  const [state, setState] = useState<FetchState<T>>({
-    data: null,
+function useFetchData(filterParam: QueryParamsType) {
+  const [state, setState] = useState<FetchState>({
+    data: Array.from({ length: DEFAULT_LIMIT }).map((i) => ({
+      id: i
+    })) as unknown as IProduct[],
     isLoading: true,
     error: null
   });
 
   const fetchData = useCallback(async (params?: QueryParamsType) => {
-    setState({ data: null, isLoading: true, error: null });
+    setState((prevState: any) => {
+      const mockEmptyData = Array.from({ length: params?.limit || DEFAULT_LIMIT }).map((i) => ({
+        id: i
+      }));
+
+      return {
+        data: params?.limit ? [...(prevState.data || []), ...mockEmptyData] : prevState.data,
+        isLoading: true,
+        error: null
+      };
+    });
 
     const queryUrl = parseQueryParams(params as QueryParamsType);
 
@@ -40,9 +54,12 @@ function useFetchData<T>(filterParam: QueryParamsType) {
       }
       const result = await response.json();
       setState({ data: result, isLoading: false, error: null });
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      setState({ data: null, isLoading: false, error: error?.message });
+      setState((prevState) => ({
+        data: prevState.data,
+        isLoading: false,
+        error: error?.message
+      }));
     }
   }, []);
 

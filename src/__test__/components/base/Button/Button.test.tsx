@@ -12,7 +12,7 @@ describe('Button Component', () => {
     expect(button).toBeInTheDocument();
     expect(button).toHaveTextContent('Click Me');
     expect(button).toHaveClass(
-      '!rounded-[.25rem] !bg-button min-h-[2.5rem] shadow-button text-white border-none flex items-center justify-center py-[0.5rem] px-[1rem] !typo-header-semi hover:!bg-button-hover'
+      'ant-btn css-dev-only-do-not-override-xex5fb ant-btn-primary ant-btn-color-primary ant-btn-variant-solid !rounded-[.25rem] bg-transparent shadow-none !bg-button min-h-[2.5rem] text-white border-none flex items-center justify-center py-[0.5rem] px-[1rem] !typo-header-semi hover:!bg-button-hover'
     );
   });
 
