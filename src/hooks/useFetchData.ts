@@ -4,12 +4,15 @@ import { useState, useEffect, useCallback } from 'react';
 import { QueryParamsType } from 'src/types/queryParams';
 
 import { DEFAULT_LIMIT } from '@/lib/constants';
+import { parseQueryParams } from '@/lib/utils/parseQueryParams';
 
 type FetchState<T> = {
   data: T | null;
   isLoading: boolean;
   error: string | null;
 };
+
+const JSON_SERVER_URL = process.env.NEXT_PUBLIC_BASE_SERVER_URL;
 
 function useFetchData<T>(filterParam: QueryParamsType) {
   const [state, setState] = useState<FetchState<T>>({
@@ -21,15 +24,16 @@ function useFetchData<T>(filterParam: QueryParamsType) {
   const fetchData = useCallback(async (params?: QueryParamsType) => {
     setState({ data: null, isLoading: true, error: null });
 
-    const queryUrl = '/api/products';
+    const queryUrl = parseQueryParams(params as QueryParamsType);
+
+    const url = `${JSON_SERVER_URL}/products${queryUrl}`;
 
     try {
-      const response = await fetch(queryUrl, {
-        method: 'POST',
+      const response = await fetch(url, {
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(params)
+        }
       });
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
